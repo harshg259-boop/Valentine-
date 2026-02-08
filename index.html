@@ -1,107 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Be My Valentine 💖</title>
+  <meta charset="UTF-8" />
+  <title>Hey Bani 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
     }
 
     .card {
       background: white;
-      padding: 25px;
+      padding: 30px;
       border-radius: 20px;
       text-align: center;
       width: 90%;
       max-width: 350px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      animation: pop 1s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     h1 {
-      color: #ff2e63;
+      color: #ff4d6d;
       margin-bottom: 10px;
     }
 
     p {
       color: #444;
-      margin-bottom: 20px;
     }
 
     button {
       padding: 12px 20px;
-      font-size: 1rem;
+      font-size: 16px;
       border: none;
-      border-radius: 12px;
+      border-radius: 30px;
       cursor: pointer;
+      margin: 10px;
     }
 
-    #yesBtn {
-      background: #ff2e63;
+    #yes {
+      background: #ff4d6d;
       color: white;
-      margin-right: 10px;
     }
 
-    #noBtn {
-      background: #ddd;
+    #no {
+      background: #ccc;
       position: absolute;
     }
 
-    .hint {
-      margin-top: 20px;
-      font-size: 0.8rem;
-      opacity: 0.6;
+    .heart {
+      position: fixed;
+      color: red;
+      animation: float 6s linear infinite;
+      font-size: 20px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
     }
   </style>
 </head>
-
 <body>
 
-  <div class="card">
-    <h1>Bani 💖</h1>
-    <p>Will you be my Valentine?</p>
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-    <button id="yesBtn" onclick="yesClicked()">Yes</button>
-    <button id="noBtn" onmouseover="moveNo()">No</button>
+<div class="card">
+  <h1>Bani ❤️ Harsh</h1>
+  <p>Life gave me many choices,<br>but my favourite one is you.</p>
+  <h2>Will you be my Valentine? 🌹</h2>
+  <button id="yes" onclick="goYes()">YES 💖</button>
+  <button id="no" onmouseover="moveNo()">NO 🙃</button>
+</div>
 
-    <div class="hint">
-      PS: Saying no is suspiciously difficult 😌
-    </div>
-  </div>
+<script>
+  function moveNo() {
+    const no = document.getElementById("no");
+    no.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    no.style.top = Math.random() * (window.innerHeight - 50) + "px";
+  }
 
-  <script>
-    function yesClicked() {
-      alert(
-        "Good choice, Bani 😌💖\n\n" +
-        "Harsh + Bani = Official now.\n" +
-        "Valentine status: CONFIRMED."
-      );
+  function goYes() {
+    window.location.href = "yes.html";
+  }
 
-      // HARD redirect (this WILL work)
-      window.location.assign("yes.html");
-    }
+  // floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
 
-    function moveNo() {
-      const btn = document.getElementById("noBtn");
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
-      btn.style.left = x + "px";
-      btn.style.top = y + "px";
-    }
-  </script>
-
-</body>
-</html>  </script>
+    setTimeout(() => heart.remove(), 6000);
+  }, 400);
+</script>
 
 </body>
 </html>
-
-
